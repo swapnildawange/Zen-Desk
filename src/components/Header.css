@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__left {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  margin-top: 0.3rem;
+  border-bottom: 1px solid rgba(136, 150, 223, 0.2);
+  padding: 1.5rem 0;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+.header__logo > h1 {
+  color: white;
+}
+.header__logo > button {
+  outline: none;
+  background: none;
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+  /* margin-top: 0.3rem; */
+  color: whitesmoke;
+  width: max-content;
+  height: 2.8rem;
+  border: 1px solid white;
+  background-color: rgba(136, 150, 223, 0.2);
+  border-radius: 1rem;
+}
+.header__left > button {
+  outline: none;
+  background: none;
+  padding: 0.3rem 0.8rem;
+  /* margin-top: 0.3rem; */
+  color: whitesmoke;
+  width: max-content;
+  height: 2.8rem;
+  border: 1px solid white;
+  background-color: rgba(136, 150, 223, 0.2);
+  border-radius: 1rem;
+}
+.header__left__user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.user__icon {
+  margin: 0.25rem 0.8rem !important;
+}
+.header__left__user > p {
+  color: rgb(93, 107, 177);
+}
+
+.header__left__user > h5 {
+  color: whitesmoke;
+}
+.header__right {
+  flex: 0.2;
+
+  /* display: flex;
+  justify-content: flex-end;
+  align-items: center; */
+}
+/* .header__right > p {
+  color: lightgray;
+}
+.header__right > h5 {
+  color: whitesmoke;
+}
+.header__right > button {
+  padding: 0.8rem;
+  margin: 1rem;
+  background-color: transparent;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+  border-radius: 0.8rem;
+   box-shadow: -5px -5px 10px rgba(97, 95, 95, 0.1),
+  5px 5px 10px rgb(39, 47, 82),
+  inset -2px -2px 5px rgba(54, 52, 52, 0.1),
+  inset 2px 2px 5px rgb(45, 54, 90),
+  0 0 1px rgb(42, 49, 82); 
+  box-shadow: inset -2px -2px 5px rgba(54, 52, 52, 0.1),
+    inset 2px 2px 5px rgba(45, 54, 90, 0.5), 0 0 4px -3px rgba(42, 49, 82, 0.8),
+    0 0 6px -5px rgba(42, 49, 82, 0.4);
+} */
