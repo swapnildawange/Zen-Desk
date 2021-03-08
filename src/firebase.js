@@ -1,15 +1,15 @@
-import firebase from 'firebase';
+import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAgobFDJ3KvQMnf0aDDGc35dmhJWRvD5rw",
-  authDomain: "messenger-3deca.firebaseapp.com",
-  projectId: "messenger-3deca",
-  storageBucket: "messenger-3deca.appspot.com",
-  messagingSenderId: "821702569161",
-  appId: "1:821702569161:web:d4bb3bb1ddc65f7ae93118"
+  apiKey: "AIzaSyDnXKivURHOxtgYA4v3Z8nFmTI4pnqh9RY",
+  authDomain: "chat-application-6a999.firebaseapp.com",
+  projectId: "chat-application-6a999",
+  storageBucket: "chat-application-6a999.appspot.com",
+  messagingSenderId: "121995122511",
+  appId: "1:121995122511:web:7ab112685b41909455973a"
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-const database = app.firestore()
-
+const database = app.firestore();
+export const auth = firebase.auth();
 export default database;

@@ -1,0 +1,13 @@
+.message__box {
+  flex: 0.6;
+  position: relative;
+  margin-top: 15vh;
+}
+.message__form {
+  width: 100%;
+  top: 100%;
+  position: sticky;
+  z-index: 99;
+}
+.dummy {
+}

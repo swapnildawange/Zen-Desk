@@ -7,7 +7,6 @@
 .message_user {
   text-align: left !important;
   margin-left: auto;
-  color: red !important;
 }
 .message_guest_card {
   background: rgba(233, 232, 232, 0.2) !important;

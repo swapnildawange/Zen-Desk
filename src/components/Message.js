@@ -19,7 +19,7 @@ const StyledCardContent = styled(CardContent)`
 `;
 const StyledTypography = styled(Typography)`
   max-width: 60vw;
-  min-width: 5.5rem;
+  min-width: 5.7rem;
 `;
 
 const StyledContainer = styled.div`
@@ -30,11 +30,8 @@ const StyledAvtar = styled(Avatar)``;
 
 const Message = forwardRef(({ userName, message, time }, ref) => {
   const isUser = userName === message.username;
-
-  
-
   return (
-    <div ref={ref} className={`message ${isUser && "message_user"}`}>
+    <div ref={ref} className={`${isUser && "message_user"} message`}>
       <StyledContainer>
         <StyledCard
           className={isUser ? "message_user_card" : "message_guest_card"}

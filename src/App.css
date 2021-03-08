@@ -3,48 +3,22 @@
   padding: 0;
 }
 body {
-  background-color: rgb(61, 71, 117);
+  /* background-color: rgb(61, 71, 117); */
+  background: #2b3358;
+  background-image: linear-gradient(#404b7a, #2b3358, #2b3358);
+
+  overflow: hidden;
 }
 
 .app {
   text-align: center;
-  
-  /* position: relative; */
 }
-/* .app__main{
+.app__main {
+  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  flex: 0.8;
-} */
-
-.chatMessage {
-  color: red;
 }
 .dummy {
-  padding-bottom: 4rem;
+  opacity: 0;
 }
-/* 
-.app_form {
-  padding: 20px;
-
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  border: 2px solid red;
-  display: flex ;
-  width: 100%;
-  background-color: rgba(7, 20, 63, 0.1);
-  backdrop-filter: blur(4px);
-}
-.app_formControl {
-  display: flex !important;
-  flex-direction: row !important;
-}
-
-.app__input {
-  flex: 1 !important;
-}
-.app__iconButton {
-  flex: 0 !important;
-} */
