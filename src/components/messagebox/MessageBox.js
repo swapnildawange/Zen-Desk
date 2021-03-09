@@ -15,12 +15,13 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SendIcon from "@material-ui/icons/Send";
 import Zoom from "@material-ui/core/Zoom";
 import FlipMove from "react-flip-move";
-import database from "../firebase";
+import database from "../firebase/firebase";
 import firebase from "firebase";
 import Message from "./Message";
 import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import { useParams } from "react-router-dom";
+import Moment from "react-moment";
 
 const StyledMessageBox = styled.div`
   bottom: 0;
@@ -88,8 +89,8 @@ const StyledIconButton = styled(IconButton)`
 function MessageBox({ match }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  let { userID } = useParams(null);
-  // let [userID, setuserID] = useState("wgXRQxMcZEvMbQ3Ki6EH");
+  let { customerID } = useParams(null);
+  // let [customerID, setcustomerID] = useState("wgXRQxMcZEvMbQ3Ki6EH");
   const user = useSelector(selectUser);
   const mainRef = useRef(null);
 
@@ -102,7 +103,7 @@ function MessageBox({ match }) {
     setChosenEmoji(emojiObject);
     setInput(input + chosenEmoji.emoji);
   };
-  //get userID
+  //get customerID
 
   //add messages to firebase
 
@@ -117,17 +118,17 @@ function MessageBox({ match }) {
   // show all messages on screen
 
   useEffect(() => {
-    if (userID) {
+    if (customerID) {
       // database
-      //   .collection("users")
-      //   .doc(userID)
+      //   .collection("customer")
+      //   .doc(customerID)
       //   .onSnapshot((snapshot) => {
       //     setcurrentCustomer(snapshot.data().displayName);
       //   });
 
       database
-        .collection("users")
-        .doc(userID)
+        .collection("customer")
+        .doc(customerID)
         .collection("messages")
         .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) => {
@@ -136,10 +137,10 @@ function MessageBox({ match }) {
           );
         });
     }
-  }, [userID]);
+  }, [customerID]);
   const sendMesssage = (event) => {
     event.preventDefault();
-    database.collection("users").doc(userID).collection("messages").add({
+    database.collection("customer").doc(customerID).collection("messages").add({
       message: input,
       username: user.displayName,
       email: user.email,
@@ -148,6 +149,7 @@ function MessageBox({ match }) {
 
     setInput("");
   };
+  console.log(messages);
   return (
     <div className="message__box">
       <StyledMessageBox>

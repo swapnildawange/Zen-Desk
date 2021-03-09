@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../features/userSlice";
-import database, { auth } from "../firebase";
+import { login } from "../../features/userSlice";
+import database, { auth } from "../firebase/firebase";
 import firebase from "firebase";
 import "./Login.css";
 function Login() {
@@ -10,11 +10,12 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const loginToApp = (e) => {
+  const loginToApp = async (e) => {
     e.preventDefault();
-    auth
+    await auth
       .signInWithEmailAndPassword(email, password)
       .then((userAuth) => {
+        console.log(userAuth);
         dispatch(
           login({
             email: userAuth.user.email,
@@ -23,20 +24,16 @@ function Login() {
           })
         );
       })
-      .catch((err) => console.log(err));
-    database.collection("users").add({
-      displayName: name,
-      email: email,
-      password: password,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+      .catch((err) => alert(err));
+
+    // database.collection("customer").add({
+    //   displayName: name,
+    //   email: email,
+    //   password: password,
+    //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    // });
   };
-  // const addToDatabse = () => { database.collection("users").add({
-  //   displayName: name,
-  //   email: email,
-  //   password: password,
-  //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-  // });};
+  // const addToDatabse = () => { ;};
 
   const register = () => {
     if (!name) {
@@ -60,6 +57,12 @@ function Login() {
                 displayName: userAuth.user.displayName,
               })
             );
+            database.collection("customer").add({
+              displayName: name,
+              email: email,
+              password: password,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
           });
       })
       .catch((err) => console.log(err));

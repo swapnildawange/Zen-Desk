@@ -6,18 +6,58 @@ body {
   /* background-color: rgb(61, 71, 117); */
   background: #2b3358;
   background-image: linear-gradient(#404b7a, #2b3358, #2b3358);
-
-  overflow: hidden;
 }
+/* * .MuiAvatar-img {
+  border-radius: 1rem !important;
+  border: 5px solid rgb(10, 106, 170) !important;
+} */
 
 .app {
   text-align: center;
 }
-.app__main {
-  min-height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+.app__gridContainer {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 20% auto 20%;
+  grid-template-rows: 15% auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Header Header  timeline"
+    "sidebar messages  timeline";
+  overflow: auto;
+}
+.app__customergridContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 15% auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Header Header  "
+    "messages messages  ";
+  overflow: hidden;
+  border: 2px solid #404b7a
+}
+.app__header {
+  grid-area: Header;
+  /* border: 2px solid red; */
+}
+.app__sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid rgba(136, 150, 223, 0.2);
+}
+.app__messages {
+  grid-area: messages;
+  border-right: 1px solid rgba(136, 150, 223, 0.2);
+}
+.app__timeline {
+  grid-area: timeline;
+  /* border: 2px solid pink; */
 }
 .dummy {
   opacity: 0;

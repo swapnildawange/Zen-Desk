@@ -4,29 +4,27 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 import "./Header.css";
-import { logout, selectUser } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import database, { auth } from "../firebase";
+import database, { auth } from "../firebase/firebase";
 import { useParams } from "react-router-dom";
-
-function Header() {
+import { logout, selectUser } from "../../features/userSlice";
+function Header({ show, isCustomer }) {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const { userID } = useParams();
+  const { customerID } = useParams();
   const [currentCustomer, setcurrentCustomer] = useState([]);
 
   useEffect(() => {
-    if (userID) {
+    if (customerID) {
       database
-        .collection("users")
-        .doc(userID)
+        .collection("customer")
+        .doc(customerID)
         .onSnapshot((snapshot) => {
-          setcurrentCustomer(snapshot.data().displayName);
+          setcurrentCustomer(snapshot.data()?.displayName);
         });
-      console.log(userID);
+      console.log(customerID);
     }
-  }, [userID]);
-
+  }, [customerID]);
   const logoutFromApp = (e) => {
     dispatch(logout());
     auth.signOut();
@@ -42,17 +40,22 @@ function Header() {
           <h1>Zen Desk</h1>
         </div>
       </div>
-      <div className="header__middle">
-        <div className="header_middleLeft">
-          <Avatar
-            className="user__icon"
-            src={`https://avatars.dicebear.com/api/human/:${userID}.svg`}
-          />
-          <h5>{currentCustomer}</h5>
-        </div>
-        <button type="submit">Mark as done</button>
-      </div>
-      <div className="header__right"></div>
+      {show && (
+        <>
+          <div className="header__middle">
+            <div className="header_middleLeft">
+              <Avatar
+                className="user__icon"
+                src={`https://avatars.dicebear.com/api/human/:${customerID}.svg`}
+              />
+              <h4>{currentCustomer}</h4>
+            </div>
+          </div>
+          <div className="header__right">
+            <button type="submit">Mark as done</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

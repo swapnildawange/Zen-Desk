@@ -1,0 +1,23 @@
+.message__box {
+  flex: 0.6;
+  position: relative;
+  padding-top: 0.2rem;
+}
+.message__form {
+  width: 100%;
+  top: 100%;
+  position: sticky;
+  z-index: 99;
+}
+.dummy {
+}
+.message__dayChange {
+  background-color: rgba(102, 102, 102, 0.2);
+  backdrop-filter: blur(20px);
+  color: whitesmoke;
+  padding: 0.5rem 0.7rem;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+}

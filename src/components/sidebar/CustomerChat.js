@@ -1,7 +1,7 @@
 import { Avatar } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import database from "../firebase";
+import database from "../firebase/firebase";
 import "./CustomerChat.css";
 function CustomerChat({ id, name }) {
   const [message, setMessages] = useState([]);
@@ -9,7 +9,7 @@ function CustomerChat({ id, name }) {
   useEffect(() => {
     if (id) {
       database
-        .collection("users")
+        .collection("customer")
         .doc(id)
         .collection("messages")
         .orderBy("timeStamp", "desc")
@@ -19,7 +19,7 @@ function CustomerChat({ id, name }) {
     }
   }, [id, name]);
   return (
-    <Link to={`/users/${id}`}>
+    <Link to={`/customer/${id}`}>
       <div className="customerchat">
         <div className="customer__container">
           <div className="customer__avatar">

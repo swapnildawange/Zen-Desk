@@ -3,8 +3,7 @@ import styled from "styled-components";
 import Moment from "react-moment";
 import "moment-timezone";
 import { Avatar, Card, CardContent, Typography } from "@material-ui/core";
-
-import "../Message.css";
+import "./Message.css";
 const StyledCard = styled(Card)``;
 const StyledMoment = styled(Moment)`
   position: absolute;
