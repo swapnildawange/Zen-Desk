@@ -2,6 +2,7 @@
   flex: 0.6;
   position: relative;
   padding-top: 0.2rem;
+  position: relative;
 }
 .message__form {
   width: 100%;
@@ -20,4 +21,14 @@
   margin: 0 auto;
   border-radius: 1rem;
   font-size: 0.8rem;
+}
+.message__emojipicker {
+  bottom: 11vh;
+  position: absolute;
+  padding: 0 1rem;
+}
+.emoji-picker-react {
+  border: none !important;
+  box-shadow: none !important;
+  width: 50% !important;
 }

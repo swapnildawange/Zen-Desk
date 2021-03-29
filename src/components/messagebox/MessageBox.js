@@ -68,40 +68,36 @@ const StyledFormControl = styled(FormControl)`
 `;
 const StyledInsertEmoticonIcon = styled(InsertEmoticonIcon)`
   color: #f7f7fe !important;
-  ${"" /* display: flex !important; */}
   cursor: pointer;
 `;
 const StyledInput = styled(Input)`
   flex: 1 !important;
-  ${"" /* max-width: 100vw; */}
   margin: 0 1rem;
 `;
 
 const StyledIconButton = styled(IconButton)`
   flex: 0 !important;
   margin-right: 2rem !important;
-  ${"" /* border: 2px solid red !important; */}
   background-color: rgba(7, 20, 63, 0.1) !important;
   color: #f7f7fe !important;
   box-shadow: 2px 2px 5px -1px rgba(7, 20, 63, 0.7) !important;
 `;
 
-function MessageBox({ match }) {
+function MessageBox({ type }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  let { customerID } = useParams(null);
-  // let [customerID, setcustomerID] = useState("wgXRQxMcZEvMbQ3Ki6EH");
   const user = useSelector(selectUser);
+  let customerID = user.id;
+  // let [customerID, setcustomerID] = useState("wgXRQxMcZEvMbQ3Ki6EH");
+  const [employeeID, setEmployeeID] = useState("");
+  const [employee, setEmployee] = useState([]);
   const mainRef = useRef(null);
 
   const [openEmojipicker, setOpenEmojipicker] = useState(false);
 
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-
   //add emoji in input field
   const onEmojiClick = (event, emojiObject) => {
-    setChosenEmoji(emojiObject);
-    setInput(input + chosenEmoji.emoji);
+    setInput(input + emojiObject.emoji);
   };
   //get customerID
 
@@ -118,29 +114,39 @@ function MessageBox({ match }) {
   // show all messages on screen
 
   useEffect(() => {
-    if (customerID) {
-      // database
-      //   .collection("customer")
-      //   .doc(customerID)
-      //   .onSnapshot((snapshot) => {
-      //     setcurrentCustomer(snapshot.data().displayName);
-      //   });
+    const getEmployee = async () => {
+      if (customerID) {
+        // select a random employee from emploee collection
+        // await database.collection("employee").onSnapshot((snapshot) => {
+        //   setEmployee(
+        //     snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        //   );
+        // });
 
-      database
-        .collection("customer")
-        .doc(customerID)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) => {
-          setMessages(
-            snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() }))
-          );
-        });
-    }
-  }, [customerID]);
+        //set employeeID
+        // setEmployeeID(employee[0]?.id);
+
+        await database
+          .collection("chat")
+          .doc(customerID)
+          .collection("messages")
+          .orderBy("timestamp", "asc")
+          .onSnapshot((snapshot) => {
+            setMessages(
+              snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() }))
+            );
+          });
+      }
+    };
+
+    getEmployee();
+  }, [customerID, type]);
+  
+  console.log("employee", employee);
+
   const sendMesssage = (event) => {
     event.preventDefault();
-    database.collection("customer").doc(customerID).collection("messages").add({
+    database.collection("chat").doc(customerID).collection("messages").add({
       message: input,
       username: user.displayName,
       email: user.email,
@@ -149,7 +155,8 @@ function MessageBox({ match }) {
 
     setInput("");
   };
-  console.log(messages);
+
+  // console.log(customerID, messages, user);
   return (
     <div className="message__box">
       <StyledMessageBox>
@@ -164,10 +171,13 @@ function MessageBox({ match }) {
           ))}
         </FlipMove>
         <div className="dummy" ref={mainRef}></div>
+        {openEmojipicker && (
+          <div className="message__emojipicker">
+            <Picker onEmojiClick={onEmojiClick} />
+          </div>
+        )}
       </StyledMessageBox>
-      {openEmojipicker && (
-        <Picker className="message__emojipicker" onEmojiClick={onEmojiClick} />
-      )}
+
       <div className="message__form">
         <Form>
           <StyledFormControl>

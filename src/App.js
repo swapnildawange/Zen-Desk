@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header.js";
 import CustomerPanel from "./components/sidebar/CustomerPanel";
@@ -19,72 +19,47 @@ import {
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const [type, setType] = useState("customer");
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         dispatch(
           login({
-            email: userAuth.email,
-            uid: userAuth.uid,
             displayName: userAuth.displayName,
+            email: userAuth.email,
+            id: userAuth.photoURL,
           })
         );
       } else {
         dispatch(logout());
       }
     });
-  }, [dispatch]);
+  }, [dispatch, type]);
 
   return (
     <div className="app">
-      {!user ? (
-        <Login />
-      ) : (
-        <div>
-          <div className="app__main">
-            <BrowserRouter>
-              <Switch>
-                <Route exact path="/customer">
-                  <div className="app__gridContainer">
-                    <div className="app__header">
-                      <Header show={false} />
-                    </div>
-                    <div className="app__sidebar">
-                      <CustomerPanel />
-                    </div>
-                    <div className="app__messages"></div>
-                    <div className="app__timeline"></div>
+      <div className="app__main">
+        {!user ? (
+          <Login type={type} />
+        ) : (
+          <BrowserRouter>
+            <Switch>
+              <Route path="/chat">
+                <div className="app__customergridContainer">
+                  <div className="app__header">
+                    <Header show={false} />
                   </div>
-                </Route>
-
-                <Route exact path="/customer/:customerID">
-                  <div className="app__gridContainer">
-                    <div className="app__header">
-                      <Header show={true} />
-                    </div>
-                    <div className="app__sidebar">
-                      <CustomerPanel />
-                    </div>
-                    <div className="app__messages">
-                      <MessageBox />
-                    </div>
-                    <div className="app__timeline">
-                      <Timeline />
-                    </div>
+                  <div className="app__messages">
+                    <MessageBox type={type} />
                   </div>
-                </Route>
-              </Switch>
-            </BrowserRouter>
-          </div>
-        </div>
-      )}
+                </div>
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        )}
+      </div>
     </div>
   );
 }
 
 export default App;
-{
-  /*  */
-}
-{
-}
