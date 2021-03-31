@@ -5,6 +5,6 @@ Introduction
   This is a customer Service Web App for small business. 
   
 # Technologies
-React 
+<li>React </li>
 Firebase
 Redux
