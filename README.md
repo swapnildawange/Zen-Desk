@@ -3,7 +3,7 @@
   This is a customer Service Web App for small business. 
   
   
-  <img src="/docs/logo.png" alt="My cool logo"/>
+  <img src="/customer.png" />
 # Technologies
 <li>React</li>
 <li>Firebase</li>
