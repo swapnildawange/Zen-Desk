@@ -1,6 +1,5 @@
 .message {
   text-align: left !important;
-  /* padding:0 10px; */
   margin: 20px 10px;
   width: fit-content;
 }
@@ -10,10 +9,8 @@
 }
 .message_guest_card {
   background: rgba(233, 232, 232, 0.2) !important;
-  /* background: rgba(22, 28, 71,.7) !important; */
   border-radius: 1rem !important;
   box-shadow: -1px -1px 8px -8px #e9e8e8, inset -2px -2px 8px -6px #e9e8e8 !important;
-  /* box-shadow: -2px -2px 8px 5px rgb(0, 0, 2) inset -2px -2px 8px -6px rgba(2, 4, 20, 1) !important; */
   float: right !important;
   margin-left: 1rem !important;
 }

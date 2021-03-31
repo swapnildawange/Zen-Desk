@@ -37,7 +37,7 @@ function CustomerPanel() {
         {customers.map((cust) => (
           <CustomerChat
             key={cust.id}
-            id={cust.id}
+            customerID={cust.id}
             name={cust.data.displayName}
           />
         ))}

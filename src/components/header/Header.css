@@ -1,27 +1,26 @@
 .header {
   display: grid;
-  grid-template-columns: 24.9% auto 24.9%;
+  grid-template-columns: auto auto 24.9%;
   gap: 0px 0px;
   grid-template-areas: "header__left header__middle header__right";
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(136, 150, 223, 0.2);
   border-right: 1px solid rgba(136, 150, 223, 0.2);
 }
 
 .header__left {
   width: 100%;
-  /* height: 100%; */
 }
 .header__logo {
   display: flex;
   align-items: center;
 }
-.header__logo > h1 {
+.header__title {
   color: white;
+  font-size: 1.7rem;
 }
 .header__logo > button {
   outline: none;
@@ -40,12 +39,8 @@
     inset -2px -2px 5px rgba(33, 39, 71, 0.1),
     inset 2px 2px 5px rgba(33, 39, 71, 1), 0 0 12px -11px #1f1f1f;
 }
-.back__icon {
-  /* margin-top: 0.3rem !important; */
-}
 
 .header__middle {
-  /* /* border-right: 1px solid rgba(136, 150, 223, 0.2); */
   justify-content: flex-start;
 }
 
@@ -76,21 +71,37 @@
 .header__right {
   width: 100%;
 }
+.header__right > .markBtnIcon {
+  display: none;
+}
 .header__right > button {
   outline: none;
   background: none;
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
   color: whitesmoke;
   width: max-content;
   height: 2.8rem;
-  margin-right: 0.8rem;
-
-  border: 1px solid white;
+  font-size: 1rem;
+  border: none;
   background-color: rgba(136, 150, 223, 0.1);
   border-radius: 1rem;
-
   border: 2px solid transparent;
   box-shadow: -5px -5px 10px -9px #212747, 5px 5px 10px -9px #212747,
     inset -2px -2px 5px rgba(33, 39, 71, 0.1),
     inset 2px 2px 5px rgba(33, 39, 71, 1), 0 0 12px -11px #1f1f1f;
+}
+
+@media screen and (max-width: 600px) {
+  .header_middleLeft > .MuiAvatar-root,
+  h4 {
+    display: none;
+  }
+  .header__right > .markBtnText {
+    display: none;
+  }
+  .header__right > .markBtnIcon {
+    display: block;
+  }
 }

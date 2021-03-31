@@ -56,7 +56,6 @@ const Form = styled.form`
   align-items: center;
   height: 7.2vh;
   background: linear-gradient(#475284, #2b3358);
-  backdrop-filter: blur(4px);
 `;
 const StyledFormControl = styled(FormControl)`
   display: flex !important;
@@ -82,15 +81,15 @@ const StyledIconButton = styled(IconButton)`
   color: #f7f7fe !important;
   box-shadow: 2px 2px 5px -1px rgba(7, 20, 63, 0.7) !important;
 `;
-
 function MessageBox({ type }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const user = useSelector(selectUser);
-  let customerID = user.id;
-  // let [customerID, setcustomerID] = useState("wgXRQxMcZEvMbQ3Ki6EH");
-  const [employeeID, setEmployeeID] = useState("");
-  const [employee, setEmployee] = useState([]);
+  let { customerID } = useParams();
+  if (type === "customer") {
+    customerID = user.id;
+  }
+
   const mainRef = useRef(null);
 
   const [openEmojipicker, setOpenEmojipicker] = useState(false);
@@ -99,7 +98,7 @@ function MessageBox({ type }) {
   const onEmojiClick = (event, emojiObject) => {
     setInput(input + emojiObject.emoji);
   };
-  //get customerID
+  //get id
 
   //add messages to firebase
 
@@ -116,16 +115,6 @@ function MessageBox({ type }) {
   useEffect(() => {
     const getEmployee = async () => {
       if (customerID) {
-        // select a random employee from emploee collection
-        // await database.collection("employee").onSnapshot((snapshot) => {
-        //   setEmployee(
-        //     snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        //   );
-        // });
-
-        //set employeeID
-        // setEmployeeID(employee[0]?.id);
-
         await database
           .collection("chat")
           .doc(customerID)
@@ -141,8 +130,6 @@ function MessageBox({ type }) {
 
     getEmployee();
   }, [customerID, type]);
-  
-  console.log("employee", employee);
 
   const sendMesssage = (event) => {
     event.preventDefault();
@@ -156,7 +143,6 @@ function MessageBox({ type }) {
     setInput("");
   };
 
-  // console.log(customerID, messages, user);
   return (
     <div className="message__box">
       <StyledMessageBox>

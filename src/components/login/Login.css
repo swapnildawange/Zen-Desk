@@ -5,6 +5,9 @@
   margin-right: auto;
   min-height: 100vh;
 }
+.login__input {
+  /* margin: 0 1rem; */
+}
 .login > img {
   object-fit: contain;
   height: 7.9rem;
@@ -15,7 +18,7 @@
   flex-direction: column;
 }
 .login > form > input {
-  width: 21.875rem;
+  width: 20rem;
   height: 3.125rem;
   font-size: 1.125rem;
   padding-left: 0.6rem;
@@ -24,8 +27,8 @@
   border: 1px solid lightgray;
   outline-color: gray;
 }
-.login > form > button {
-  width: 22.8rem;
+.login > form > Button {
+  width: 20.8rem;
   height: 3.125rem;
   font-size: large;
   color: #fff;
@@ -45,37 +48,16 @@
   color: #5a68a5;
 }
 
-/* .login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid lightgray;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 0.8rem;
-    width: 30vw;
+.MuiPaper-root {
+  position: relative;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .login > form > input {
+    width: 15rem;
   }
-  .login__input {
-    display: flex;
-    flex-direction: column;
+  .login > form > Button {
+    width: 15.8rem;
   }
-  .login__input > input {
-    height: 3rem;
-    margin: 1rem 0;
-    outline: none;
-    border: 1px solid gray;
-    border-radius: 0.4rem;
-    font-size: 1.25rem;
-    padding-left: 1rem;
-    color: black;
-  }
-  .login > button {
-    padding: 1rem;
-    font-size: 1rem;
-    outline: none;
-    background-color: rgb(12, 113, 196);
-    color: white;
-    border-radius: 0.25rem;
-    border: none;
-  } */
+}

@@ -1,34 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { Avatar, Button, IconButton } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import React, { useEffect, useRef, useState } from "react";
+import { Avatar, IconButton } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-
+import DoneAllIcon from "@material-ui/icons/DoneAll";
+import DoneIcon from "@material-ui/icons/Done";
 import "./Header.css";
 import { useDispatch, useSelector } from "react-redux";
 import database, { auth } from "../firebase/firebase";
-import { useParams } from "react-router-dom";
 import { logout, selectUser } from "../../features/userSlice";
-function Header({ show, isCustomer }) {
+import { useParams } from "react-router";
+function Header({ type }) {
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
-  const { customerID } = useParams();
-  const [currentCustomer, setcurrentCustomer] = useState([]);
+  let { customerID } = useParams();
+  if (type === "customer") {
+    customerID = user.id;
+  }
 
-  useEffect(() => {
-    if (customerID) {
-      database
-        .collection("customer")
-        .doc(customerID)
-        .onSnapshot((snapshot) => {
-          setcurrentCustomer(snapshot.data()?.displayName);
-        });
-      console.log(customerID);
-    }
-  }, [customerID]);
+  const [currentCustomer, setcurrentCustomer] = useState(null);
+  const [isMarked, setisMarked] = useState(null);
+  const dispatch = useDispatch();
+  const markBtn = useRef();
   const logoutFromApp = (e) => {
     dispatch(logout());
     auth.signOut();
     e.preventDefault();
+  };
+
+  useEffect(() => {
+    getCurrentCustomer();
+  }, [customerID]);
+
+  const getCurrentCustomer = async () => {
+    if (customerID) {
+      await database
+        .collection("customer")
+        .doc(customerID)
+        .onSnapshot((snapshot) => {
+          setcurrentCustomer(snapshot.data());
+        });
+      await setisMarked(currentCustomer?.isDone);
+    }
+  };
+  const markAsDone = async (e) => {
+    e.preventDefault();
+
+    await database
+      .collection("customer")
+      .doc(customerID)
+      .update({ isDone: !isMarked });
+    getCurrentCustomer();
   };
   return (
     <div className="header">
@@ -37,25 +56,54 @@ function Header({ show, isCustomer }) {
           <IconButton onClick={logoutFromApp}>
             <KeyboardBackspaceIcon className="back__icon" />
           </IconButton>
-          <h1>Zen Desk</h1>
+          <h2 className="header__title">Zen Desk</h2>
         </div>
       </div>
-      {show && (
-        <>
-          <div className="header__middle">
-            <div className="header_middleLeft">
-              <Avatar
-                className="user__icon"
-                src={`https://avatars.dicebear.com/api/human/:${customerID}.svg`}
-              />
-              <h4>{currentCustomer}</h4>
-            </div>
+      <>
+        <div className="header__middle">
+          <div className="header_middleLeft">
+            <Avatar
+              className="user__icon"
+              src={`https://avatars.dicebear.com/api/human/:${user.id}.svg`}
+            />
+            <h4>{user.displayName}</h4>
           </div>
-          <div className="header__right">
-            <button type="submit">Mark as done</button>
-          </div>
-        </>
-      )}
+        </div>
+        <div className="header__right">
+          {type === "customer" && (
+            <>
+              <IconButton
+                className="markBtnText"
+                ref={markBtn}
+                type="submit"
+                onClick={markAsDone}
+              >
+                {currentCustomer?.isDone ? (
+                  <>Marked as done</>
+                ) : (
+                  <>Mark as done</>
+                )}
+              </IconButton>
+              <IconButton
+                className="markBtnIcon"
+                ref={markBtn}
+                type="submit"
+                onClick={markAsDone}
+              >
+                {currentCustomer?.isDone ? (
+                  <>
+                    <DoneAllIcon />
+                  </>
+                ) : (
+                  <>
+                    <DoneIcon />
+                  </>
+                )}
+              </IconButton>
+            </>
+          )}
+        </div>
+      </>
     </div>
   );
 }

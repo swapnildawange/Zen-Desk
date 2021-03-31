@@ -10,7 +10,7 @@ import "./Timeline.css";
 import Moment from "react-moment";
 function Timeline() {
   const { customerID } = useParams();
-  const [currentCustomer, setcurrentCustomer] = useState("");
+  const [currentCustomer, setcurrentCustomer] = useState(null);
   const [messages, setMessages] = useState([]);
   useEffect(() => {
     if (customerID) {
@@ -18,7 +18,7 @@ function Timeline() {
         .collection("customer")
         .doc(customerID)
         .onSnapshot((snapshot) => {
-          setcurrentCustomer(snapshot.data()?.displayName);
+          setcurrentCustomer(snapshot.data());
         });
 
       database
@@ -33,6 +33,7 @@ function Timeline() {
         });
     }
   }, [customerID]);
+  // console.log(currentCustomer.isDone);
   return (
     <div className="timeline">
       <div className="timeline__top">
@@ -45,7 +46,7 @@ function Timeline() {
           className="user__icon"
           src={`https://avatars.dicebear.com/api/human/:${customerID}.svg`}
         />
-        <p>{currentCustomer?.substring(0, 7)}</p>
+        <p>{currentCustomer?.displayName}</p>
       </div>
       <div className="timeline__middle">
         <h3>Timeline</h3>
@@ -77,19 +78,25 @@ function Timeline() {
               </svg>
             </div>
             <div className="timeline__infoText">
-              <p>Communication started by {currentCustomer.substring(0, 7)}</p>
+              <p>Communication started by {currentCustomer?.displayName}</p>
             </div>
           </div>
 
-          <div className="timeline__infoLine"><span></span></div>
-          <div className="timeline__infoElement">
-            <div className="timeline__infoIcon">
-              <CheckSquareOffset size={16} />
-            </div>
-            <div className="timeline__infoText">
-              <p>Marked as done by {currentCustomer.substring(0, 7)}</p>
-            </div>
-          </div>
+          {currentCustomer?.isDone && (
+            <>
+              <div className="timeline__infoLine">
+                <span></span>
+              </div>
+              <div className="timeline__infoElement">
+                <div className="timeline__infoIcon">
+                  <CheckSquareOffset size={16} />
+                </div>
+                <div className="timeline__infoText">
+                  <p>Marked as done by {currentCustomer?.displayName}</p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

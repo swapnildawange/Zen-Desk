@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 body {
   /* background-color: rgb(61, 71, 117); */
@@ -41,24 +43,29 @@ body {
     "Header Header  "
     "messages messages  ";
   overflow: hidden;
-  border: 2px solid #404b7a
+  /* border: 2px solid #404b7a; */
 }
 .app__header {
   grid-area: Header;
-  /* border: 2px solid red; */
+  border: 1px solid rgba(136, 150, 223, 0.2);
 }
 .app__sidebar {
   grid-area: sidebar;
-  border-right: 1px solid rgba(136, 150, 223, 0.2);
+  /* border-right: 1px solid rgba(136, 150, 223, 0.2); */
 }
 .app__messages {
   grid-area: messages;
   border-right: 1px solid rgba(136, 150, 223, 0.2);
+  border-left: 1px solid rgba(136, 150, 223, 0.2);
 }
 .app__timeline {
   grid-area: timeline;
-  /* border: 2px solid pink; */
 }
 .dummy {
   opacity: 0;
+}
+@media screen and (max-width: 800px) {
+  .app__customergridContainer {
+    width: 100%;
+  }
 }

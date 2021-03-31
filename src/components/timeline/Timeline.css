@@ -1,6 +1,6 @@
 .timeline {
   flex: 0.2;
-  border-left: 1px solid rgba(136, 150, 223, 0.2);
+  /* border-left: 1px solid rgba(136, 150, 223, 0.2); */
   /* border: 1px solid pink; */
   overflow: hidden;
   text-align: left;

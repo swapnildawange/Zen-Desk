@@ -4,12 +4,15 @@ import { login, selectUser } from "../../features/userSlice";
 import database, { auth } from "../firebase/firebase";
 import firebase from "firebase";
 import "./Login.css";
-function Login({ type }) {
+import { Button } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+function LoginEmployee({ type }) {
   const user = useSelector(selectUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [customer, setCustomer] = useState("");
+  const [err, setErr] = useState({});
   const dispatch = useDispatch();
 
   const loginToApp = async (e) => {
@@ -24,20 +27,30 @@ function Login({ type }) {
             id: userAuth.user.photoURL,
           })
         );
+        setErr({
+          severity: "success",
+          error: "successfully logged in",
+        });
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setErr({
+          severity: "error",
+          error: "couldn't find your account",
+        });
+      });
   };
-  // const addToDatabse = () => { ;};
-
   const register = async () => {
     if (!name) {
-      return alert("Please enter full name to register");
+      setErr({
+        severity: "warning",
+        error: "Please enter your full name",
+      });
+      return;
     }
 
     //using photoURL to store the id from firestore for identification of collection
-
     await database
-      .collection("customer")
+      .collection("employee")
       .add({
         displayName: name,
         email: email,
@@ -63,7 +76,20 @@ function Login({ type }) {
                   })
                 );
               });
+          })
+          .catch((err) => {
+            setErr({
+              severity: "error",
+              error: "couldn't register new employee",
+            });
+            database.collection("employee").doc(response.id).delete();
           });
+      })
+      .catch((err) => {
+        setErr({
+          severity: "error",
+          error: "couldn't register new employee",
+        });
       });
   };
   return (
@@ -88,18 +114,19 @@ function Login({ type }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="submit" onClick={loginToApp}>
+        <Button type="submit" onClick={loginToApp}>
           LOGIN
-        </button>
+        </Button>
         <p>
           Not a member?&nbsp;
           <span className="login__register" onClick={register}>
             Register now
           </span>
         </p>
+        {err.severity && <Alert severity={err.severity}>{err.error}</Alert>}
       </form>
     </div>
   );
 }
 
-export default Login;
+export default LoginEmployee;
