@@ -1,9 +1,10 @@
 # Zen Desk - Customer Service Web App
 
   This is a customer Service Web App for small business. 
-# Customer Page Demo
-<img src="/employee.png" />
-# Company Page Demo
+  
+| col 1      | col 2      |
+|------------|-------------|
+| <img src="/employee.png" width="250"> | <img src="/customer.png" width="250"> |
 
 # Technologies
 <li>React</li>
