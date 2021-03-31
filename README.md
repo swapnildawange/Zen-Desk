@@ -2,9 +2,7 @@
 
   This is a customer Service Web App for small business. 
 # Customer Page Demo
-  <img src="/customer.png" />
 # Company Page Demo
-  <img src="/employee.png" />
 # Technologies
 <li>React</li>
 <li>Firebase</li>
