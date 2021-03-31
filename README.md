@@ -2,9 +2,9 @@
 
   This is a customer Service Web App for small business. 
   
-| col 1      | col 2      |
-|------------|-------------|
-| <img src="/employee.png" width="250"> | <img src="/customer.png" width="250"> |
+| Employee     | Customer     |
+|--------------|--------------|
+| <img src="/employee.png" width="450"> | <img src="/customer.png" width="450"> |
 
 # Technologies
 <li>React</li>
