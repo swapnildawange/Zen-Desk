@@ -1,9 +1,9 @@
 # Zen Desk - Customer Service Web App
 
-
-Introduction
   This is a customer Service Web App for small business. 
   
+  
+  <img src="/docs/logo.png" alt="My cool logo"/>
 # Technologies
 <li>React</li>
 <li>Firebase</li>
