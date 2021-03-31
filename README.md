@@ -17,7 +17,7 @@
  <a>https://zen-desk-6c1b2.web.app/chat</a>
  
 ## For Company
- If you want to use app as customer 
+ If you want to use app as company 
  <a>https://zen-desk-6c1b2.web.app</a>
 
 
